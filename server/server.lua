@@ -5,13 +5,15 @@ RegisterCommand("perms", function(source, args, rawCommand)
 		else
 			steam = ExtractIdentifiers(args[1])
 		end
+		id = args[1]
 	else
 		steam = ExtractIdentifiers(source)
+		id = source
 	end
 	staff = checkPerms(steam)
 	donator = checkDonator(steam)
 	TriggerClientEvent('chat:addMessage', source, { args = {"^2[JD_Perms]", "^1^*================== Permissions Check ===================="} })
-	TriggerClientEvent('chat:addMessage', source, { args = {"^3[JD_Perms]", "PlayerID: ^1^*"..args[1].."^0 | ^rPlayerName: ^1^*"..GetPlayerName(args[1])} })
+	TriggerClientEvent('chat:addMessage', source, { args = {"^3[JD_Perms]", "PlayerID: ^1^*"..id.."^0 | ^rPlayerName: ^1^*"..GetPlayerName(id)} })
 	TriggerClientEvent('chat:addMessage', source, { args = {"^4[JD_Perms]", "Staff Role: ^1^*"..staff} })
 	TriggerClientEvent('chat:addMessage', source, { args = {"^5[JD_Perms]", "Donator: ^1^*"..donator} })
 	TriggerClientEvent('chat:addMessage', source, { args = {"^6[JD_Perms]", "^1^*====================================================="} })
