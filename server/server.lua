@@ -91,7 +91,7 @@ RegisterCommand("delperms", function(source, args, rawCommand)
 		outFile:close()
 		ExecuteCommand("remove_principal identifier."..steam.." group."..args[2].."")
 		if Config.JD_logs then
-			exports.JD_logs:discord(GetPlayerName(source).." just removed "..steam.. " to the group "..args[2], source, 0, Config.JD_logsColor, Config.JD_logsChannel)
+			exports.JD_logs:discord(GetPlayerName(source).." just removed "..steam.. " from the group "..args[2], source, 0, Config.JD_logsColor, Config.JD_logsChannel)
 		end
 		print("^5[JD_Perms] Permissions updated!")
 		return
