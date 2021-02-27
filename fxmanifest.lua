@@ -1,6 +1,6 @@
 author 'JokeDevil'
 description 'JD_Perms (https://www.jokedevil.com/)'
-version '1.0.0'
+version '1.1.0'
 
 -- Config
 server_script 'config.lua'

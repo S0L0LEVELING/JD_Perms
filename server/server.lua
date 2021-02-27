@@ -1,4 +1,8 @@
 RegisterCommand("perms", function(source, args, rawCommand)
+	if source == 0 then
+		print("^1Error: This command can't be used in console.^0")
+		return
+	end
 	if args[1] ~= nil then
 		if args[1]:find("^steam:" ) ~= nil then
 			steam = args[1]
@@ -21,6 +25,18 @@ end)
 
 RegisterCommand("addperms", function(source, args, rawCommand)
 	if source == 0 then
+		if args[1] == nil then
+			print("^1Error: Please use addperms [id] [group] [Name/Comments].^0")
+			return
+		end
+		if args[3] == nil then
+			print("^1Error: Please use addperms [id] [group] [Name/Comments].^0")
+			return
+		end
+		if args[3] == nil then
+			print("^1Error: Please use addperms [id] [group] [Name/Comments].^0")
+			return
+		end
 		if args[1] ~= nil then
 			if args[1]:find("^steam:" ) ~= nil then
 				steam = args[1]
@@ -75,6 +91,14 @@ end)
 
 RegisterCommand("delperms", function(source, args, rawCommand)
 	if source == 0 then
+		if args[1] == nil then
+			print("^1Error: Please use delperms [id] [group].^0")
+			return
+		end
+		if args[3] == nil then
+			print("^1Error: Please use delperms [id] [group].^0")
+			return
+		end
 		if args[1] ~= nil then
 			if args[1]:find("^steam:" ) ~= nil then
 				steam = args[1]
@@ -144,54 +168,77 @@ function ExtractIdentifiers(src)
 end
 
 function checkPerms(steam)
-	------------------------------------------- admin
-	admin = io.open(Config.Path..'/JD_Perms.cfg', 'r')
-	fileText = admin:read('*a')
-	for line in fileText:gmatch('\nadd_principal identifier.'..steam..' group.admin[^\n]*', '[^\r\n]+') do
-		return "Admin"
-	end
-	admin:close()
-
-	--                 This is how you can add more staff roles.
-	--                 Keep in mind it will always display the highest one in this list.
-
-	-- moderator = io.open(Config.Path..'/JD_Perms.cfg', 'r')
-	-- fileText = moderator:read('*a')
-	-- for line in fileText:gmatch('\nadd_principal identifier.'..steam..' group.moderator[^\n]*', '[^\r\n]+') do
-	--	return "Moderator"
-	-- end
-	-- moderator:close()
-
-
-	return "None"
+	------------------------------------------- Loop trough Staff Groups
+	local group = '0'
+	for i = 1, #Config.StaffGroups do
+		file = io.open(Config.Path..'/JD_Perms.cfg', 'r')
+		fileText = file:read('*a')
+		for line in fileText:gmatch('\nadd_principal identifier.'..steam..' group.'..Config.StaffGroups[i]:lower()..'[^\n]*', '[^\r\n]+') do
+			if group == '0' then
+				group = Config.StaffGroups[i]
+			end
+		end
+		file:close()
+  	end	
+	  if group ~= '0' then
+		return group
+	  else
+		return "N/A"
+	  end
 end
 
-function checkDonator(steam)	
-	------------------------------------------- VIP Plus
-	vipplus = io.open(Config.Path..'/JD_Perms.cfg', 'r')
-	fileText = vipplus:read('*a')
-	for line in fileText:gmatch('\nadd_principal identifier.'..steam..' group.vipplus[^\n]*', '[^\r\n]+') do
-		return "VIP Plus"
-	end
-	vipplus:close()
-	
-	------------------------------------------- VIP
-	vip = io.open(Config.Path..'/JD_Perms.cfg', 'r')
-	fileText = vip:read('*a')
-	for line in fileText:gmatch('\nadd_principal identifier.'..steam..' group.vip[^\n]*', '[^\r\n]+') do
-		return "VIP"
-	end
-	vip:close()
-
-	--                 This is how you can add more staff roles.
-	--                 Keep in mind it will always display the highest one in this list.
-
-	--anotherdonatorgroup = io.open(Config.Path..'/JD_Perms.cfg', 'r')
-	--fileText = anotherdonatorgroup:read('*a')
-	--for line in fileText:gmatch('\nadd_principal identifier.'..steam..' group.anotherdonatorgroup[^\n]*', '[^\r\n]+') do
-	--	return "anotherdonatorgroup"
-	--end
-	--anotherdonatorgroup:close()
-
-	return "N/A"
+function checkDonator(steam)
+	------------------------------------------- Loop trough Donator Groups
+	  local group = '0'
+	  for i = 1, #Config.DonatorGroups do
+		  file = io.open(Config.Path..'/JD_Perms.cfg', 'r')
+		  fileText = file:read('*a')
+		  for line in fileText:gmatch('\nadd_principal identifier.'..steam..' group.'..Config.DonatorGroups[i]:lower()..'[^\n]*', '[^\r\n]+') do
+			  if group == '0' then
+				group = Config.DonatorGroups[i]
+			end
+		  end
+		  file:close()
+		end	
+		if group ~= '0' then
+		  return group
+		else
+		  return "N/A"
+		end
 end
+
+-- version check
+Citizen.CreateThread(
+	function()
+		local vRaw = LoadResourceFile(GetCurrentResourceName(), 'version.json')
+		if vRaw and Config.versionCheck then
+			local v = json.decode(vRaw)
+			PerformHttpRequest(
+				'https://raw.githubusercontent.com/JokeDevil/JD_Perms/master/version.json',
+				function(code, res, headers)
+					if code == 200 then
+						local rv = json.decode(res)
+						if rv.version ~= v.version then
+							print(
+								([[^1
+
+-------------------------------------------------------
+JD_Perms
+UPDATE: %s AVAILABLE
+CHANGELOG: %s
+-------------------------------------------------------
+^0]]):format(
+									rv.version,
+									rv.changelog
+								)
+							)
+						end
+					else
+						print('JD_Perms unable to check version')
+					end
+				end,
+				'GET'
+			)
+		end
+	end
+)
