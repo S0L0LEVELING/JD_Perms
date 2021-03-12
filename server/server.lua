@@ -221,8 +221,6 @@ Citizen.CreateThread(
 						if rv.version ~= v.version then
 							print(
 								([[^1
-
-<<<<<<< HEAD
 -------------------------------------------------------
 JD_Perms
 UPDATE: %s AVAILABLE
@@ -243,7 +241,3 @@ CHANGELOG: %s
 		end
 	end
 )
-=======
-	return "N/A"
-end
->>>>>>> b37ae539f52196e8be28856942fa82914f9a6643
