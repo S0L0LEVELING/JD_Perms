@@ -6,7 +6,7 @@
 	<a href="https://discord.gg/qyPdHzDKmb" title=""><img alt="Discord Status" src="https://discordapp.com/api/guilds/721339695199682611/widget.png"></a>
 </h4>
 
-https://discord.gg/qyPdHzDKmb
+https://discord.gg/prefech
 
 <h4 align="center">
 This is a server permission script for FiveM, which is used to add or remove permission groups from players.
@@ -47,4 +47,4 @@ exec resources/JD_Perms/Permissions/JD_Perms.cfg
 exec <pathToPermissionsFile>/JD_Perms.cfg
 ```
 
-### For more support join my discord: https://discord.gg/qyPdHzDKmb
+### For more support join my discord: https://discord.gg/prefech
