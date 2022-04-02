@@ -111,9 +111,9 @@ function ChatAddMessage(id, msg)
 end
 
 local commands = {
-	"addperms": "Please use /addperms [id] [group] [Name/Comments]",
-	"delperms": "Please use /delperms [id] [group]",
-	"perms": "Please use /perms [id]"
+	["perms"] = "Please use /perms [id]",
+	["addperms"] = "Please use /addperms [id] [group] [Name/Comments]",
+	["delperms"] = "Please use /delperms [id] [group]"
 }
 
 function InvalidArgs(id, rawCommand)

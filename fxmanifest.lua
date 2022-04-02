@@ -15,7 +15,7 @@
 
 author 'Prefech'
 description 'JD_Perms (https://www.prefech.com/)'
-version '1.1.2'
+version '1.1.2b'
 server_only 'yes'
 
 -- Config
