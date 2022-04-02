@@ -1,6 +1,22 @@
-author 'JokeDevil'
-description 'JD_Perms (https://www.jokedevil.com/)'
-version '1.1.0b'
+--[[
+    #####################################################################
+    #                _____           __          _                      #
+    #               |  __ \         / _|        | |                     #
+    #               | |__) | __ ___| |_ ___  ___| |__                   #
+    #               |  ___/ '__/ _ \  _/ _ \/ __| '_ \                  #
+    #               | |   | | |  __/ ||  __/ (__| | | |                 #
+    #               |_|   |_|  \___|_| \___|\___|_| |_|                 #
+    #                                                                   #
+    #                       JD_Perms By Prefech                         #
+    #                         www.prefech.com                           #
+    #                                                                   #
+    #####################################################################
+]]
+
+author 'Prefech'
+description 'JD_Perms (https://www.prefech.com/)'
+version '1.1.2'
+server_only 'yes'
 
 -- Config
 server_script 'config.lua'

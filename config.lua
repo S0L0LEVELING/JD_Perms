@@ -19,5 +19,3 @@ Config.DonatorGroups = {
 Config.JD_logs = false -- Works with JD_logs (https://github.com/JokeDevil/JD_logs)
 Config.JD_logsChannel = "perms"
 Config.JD_logsColor = "#FFFFFF"
-
-Config.versionCheck = "1.1.0b"
